@@ -1,0 +1,15 @@
+Précision test : 0.9550
+
+              precision    recall  f1-score   support
+
+       apple       0.97      0.98      0.97      2000
+       crown       0.98      0.97      0.97      2000
+     diamond       0.94      0.97      0.96      2000
+        door       0.98      0.98      0.98      2000
+    airplane       0.90      0.96      0.93      2000
+         cat       0.95      0.89      0.92      2000
+      hammer       0.97      0.94      0.95      2000
+
+    accuracy                           0.95     14000
+   macro avg       0.96      0.96      0.95     14000
+weighted avg       0.96      0.95      0.95     14000

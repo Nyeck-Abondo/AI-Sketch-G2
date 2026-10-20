@@ -8,18 +8,31 @@ import numpy as np
 import tensorflow as tf
 from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.model_selection import train_test_split
-from tensorflow import keras
-from tensorflow.keras import layers
+
+keras = tf.keras
+layers = tf.keras.layers
 
 # Noms des fichiers Quick, Draw! (en anglais) pour les classes en français
 FR_TO_EN = {
-    "maison": "house", "arbre": "tree", "voiture": "car", "chat": "cat",
-    "soleil": "sun", "poisson": "fish", "fleur": "flower", "avion": "airplane",
+    "pomme": "apple",
+    "couronne": "crown",
+    "diamant": "diamond",
+    "porte": "door",
+    "avion": "full_numpy_bitmap_airplane",
+    "airplane": "full_numpy_bitmap_airplane",
+    "chat": "full_numpy_bitmap_cat",
+    "cat": "full_numpy_bitmap_cat",
+    "marteau": "hammer",
 }
 
 from config import CLASSES, BATCH_SIZE, EPOCHS
 
-ROOT = Path(__file__).resolve().parent.parent  # racine du projet
+ROOT = Path(__file__).resolve().parent.parent.parent  # racine du projet
+
+# Définition directe des dossiers de sortie et du modèle
+OUT_DIR = ROOT / "output"
+MODEL_PATH = ROOT / "models" / "sketch_classifier.keras"
+
 SAMPLES_PER_CLASS = 10000
 SEED = 42
 def find_npy(class_name):
