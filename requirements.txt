@@ -1,0 +1,19 @@
+# Dépendances principales du projet AI-Sketch-G2
+# Environnement cible : Python 3.12+
+
+# Framework Deep Learning & Calcul Numérique
+tensorflow==2.17.0
+numpy==1.26.4
+
+# Interface Graphique (GUI)
+PyQt6==6.7.1
+
+# Traitement d'images
+opencv-python-headless==4.10.0.84
+
+# Évaluation, Métriques & Visualisation
+scikit-learn==1.5.1
+matplotlib==3.9.2
+
+# Génération de rapports Word
+python-docx==1.1.2
