@@ -33,7 +33,7 @@ ROOT = Path(__file__).resolve().parent.parent.parent  # racine du projet
 OUT_DIR = ROOT / "output"
 MODEL_PATH = ROOT / "models" / "sketch_classifier.keras"
 
-SAMPLES_PER_CLASS = 10000
+SAMPLES_PER_CLASS = 90000
 SEED = 42
 def find_npy(class_name):
     fname = FR_TO_EN.get(class_name.lower(), class_name.lower()) + ".npy"

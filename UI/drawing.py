@@ -1,6 +1,8 @@
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QPainter, QPen, QColor
 from PyQt6.QtWidgets import QWidget, QSizePolicy
+from PyQt6.QtGui import QImage, QPainter, QColor, QPen
+from PyQt6.QtCore import Qt, QSize
 
 
 class DrawingCanvas(QWidget):
@@ -119,3 +121,41 @@ class DrawingCanvas(QWidget):
     def has_drawing(self):
         """Indique si le canevas contient un dessin."""
         return bool(self.strokes or self.current_stroke)
+
+    def get_qimage_28x28(self):
+        """Exporte le dessin actuel sous forme de QImage 28x28 en niveaux de gris (fond noir, trait blanc)."""
+        image = QImage(QSize(28, 28), QImage.Format.Format_Grayscale8)
+        image.fill(QColor(0, 0, 0)) # Fond noir
+
+        if not self.strokes:
+            return image
+
+        painter = QPainter(image)
+        painter.setRenderHint(QPainter.RenderHint.Antialiasing)
+
+        # Calcul des facteurs d'échelle par rapport à la taille de la zone
+        scale_x = 28.0 / max(1, self.width())
+        scale_y = 28.0 / max(1, self.height())
+
+        for stroke in self.strokes:
+            points = stroke["points"]
+            if not points:
+                continue
+
+            # Trait blanc d'épaisseur adaptée (ex: 2.0 pixels pour du 28x28)
+            pen = QPen(QColor(255, 255, 255), 2.0, Qt.PenStyle.SolidLine, Qt.PenCapStyle.RoundCap, Qt.PenJoinStyle.RoundJoin)
+            painter.setPen(pen)
+
+            if len(points) == 1:
+                painter.drawPoint(int(points[0].x() * scale_x), int(points[0].y() * scale_y))
+            else:
+                for i in range(1, len(points)):
+                    p1 = points[i - 1]
+                    p2 = points[i]
+                    painter.drawLine(
+                        int(p1.x() * scale_x), int(p1.y() * scale_y),
+                        int(p2.x() * scale_x), int(p2.y() * scale_y)
+                    )
+
+        painter.end()
+        return image
